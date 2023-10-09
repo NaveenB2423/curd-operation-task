@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="table-responsive">
+    <button type="button" class="btn btn-warning" (click)="openAdd()" style="float: right; margin: 2%;">Add</button>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items;let i = index">
+          <td style="color: black">{{ i+1 }}</td>
+          <td style="color: black">{{ item.title }}</td>
+          <td style="color: black">{{ item.description }}</td>
+          <td>
+            <button type="button" class="btn btn-danger" *ngIf="item.id !== null" (click)="deleteItem(item.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="width: 18rem; margin: 0 auto;background-color: #faa021;" *ngIf="isEditModalOpen">
+    <div class="card-body">
+      <form (ngSubmit)="addItem()" #itemForm="ngForm">
+        <div class="form-group" style="margin: 4% !important;">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" name="title" [(ngModel)]="newItem.title" required>
+        </div>
+        <div class="form-group" style="margin: 4% !important;">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" name="description" [(ngModel)]="newItem.description" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" >Add</button>
+      </form>
+    </div>
+  </div>
+</div>
